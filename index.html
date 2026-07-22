@@ -123,9 +123,8 @@
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
   <main>
     <section class="sw-hero" style="position:relative;height:640px;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.07);">
-      <div style="position:absolute;inset:0;">
-        <image-slot id="home-hero" shape="rect" placeholder="Déposez une capture d'usine (bannière)" aria-label="Bannière : capture d'usine Satisfactory"></image-slot>
-      </div>
+      <div style="position:absolute;inset:0;background:radial-gradient(circle at 78% 20%,rgba(247,127,28,0.28),transparent 55%),radial-gradient(circle at 15% 80%,rgba(247,127,28,0.12),transparent 50%),linear-gradient(135deg,#12161d 0%,#0b0d12 60%);"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;opacity:0.06;background-image:repeating-linear-gradient(45deg,#f77f1c 0,#f77f1c 2px,transparent 2px,transparent 26px);"></div>
       <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg, rgba(11,13,18,0.96) 0%, rgba(11,13,18,0.78) 42%, rgba(11,13,18,0.25) 100%);"></div>
       <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg, #0b0d12 2%, transparent 40%);"></div>
       <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:0 40px;height:100%;display:flex;flex-direction:column;justify-content:center;pointer-events:none;">
