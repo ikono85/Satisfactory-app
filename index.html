@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Satisfactory Worlds — Hub communautaire de sauvegardes Satisfactory</title>
+<meta name="description" content="Explorez, partagez et téléchargez les plus grandes usines Satisfactory de la communauté. Des milliers de sauvegardes .sav prêtes à charger, et une app Windows pour publier en un clic.">
+<meta name="theme-color" content="#0b0d12">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://satisfactory-worlds.example/">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Satisfactory Worlds">
+<meta property="og:title" content="Satisfactory Worlds — Hub communautaire de sauvegardes">
+<meta property="og:description" content="Explorez, partagez et téléchargez les plus grandes usines Satisfactory de la communauté.">
+<meta property="og:url" content="https://satisfactory-worlds.example/">
+<meta property="og:image" content="https://satisfactory-worlds.example/og-cover.jpg">
+<meta property="og:locale" content="fr_FR">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Satisfactory Worlds — Hub communautaire de sauvegardes">
+<meta name="twitter:description" content="Explorez, partagez et téléchargez les plus grandes usines Satisfactory de la communauté.">
+<meta name="twitter:image" content="https://satisfactory-worlds.example/og-cover.jpg">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Barlow:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #0b0d12; color: #e8ebf0; font-family: 'Barlow', system-ui, sans-serif; }
+  a { color: #ffa645; text-decoration: none; }
+  a:hover { color: #ffc178; }
+  ::selection { background: #f77f1c; color: #0b0d12; }
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: #0b0d12; }
+  ::-webkit-scrollbar-thumb { background: #2a313d; border-radius: 6px; border: 3px solid #0b0d12; }
+  ::-webkit-scrollbar-thumb:hover { background: #f77f1c; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+  @keyframes glowPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(247,127,28,0.5); } 50% { box-shadow: 0 0 26px 2px rgba(247,127,28,0.35); } }
+  @keyframes hazardScroll { to { background-position: 56px 0; } }
+  @keyframes spinSlow { to { transform: rotate(360deg); } }
+  @keyframes toastIn { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+  /* --- Accessibilité : focus clavier visible --- */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible,
+  select:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 3px solid #ffa645;
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+  [role="button"] { user-select: none; }
+  button { font: inherit; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  }
+
+  /* --- Responsive : grilles fluides --- */
+  .sw-grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .sw-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .sw-grid-5 { grid-template-columns: repeat(5, 1fr); }
+  .sw-explorer { grid-template-columns: 264px 1fr; }
+  .sw-detail   { grid-template-columns: 1.55fr 1fr; }
+  .sw-app-hero { grid-template-columns: 1fr 1fr; }
+  .sw-app-cols { grid-template-columns: 1fr 1fr; }
+  .sw-form-2   { grid-template-columns: 1fr 1fr; }
+  .sw-footer   { grid-template-columns: 2fr 1fr 1fr 1fr; }
+  .sw-hero-h1  { font-size: clamp(46px, 8vw, 82px); }
+
+  @media (max-width: 1024px) {
+    .sw-grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .sw-grid-5 { grid-template-columns: repeat(3, 1fr); }
+    .sw-explorer { grid-template-columns: 1fr; }
+    .sw-explorer aside { position: static !important; }
+    .sw-detail { grid-template-columns: 1fr; }
+    .sw-detail .sw-sticky { position: static !important; }
+    .sw-app-hero { grid-template-columns: 1fr; }
+    .sw-footer { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 720px) {
+    .sw-header { flex-wrap: wrap !important; gap: 12px !important; padding: 12px 18px !important; }
+    .sw-nav { order: 3; width: 100%; overflow-x: auto; }
+    .sw-grid-3, .sw-grid-4, .sw-grid-5, .sw-app-cols, .sw-form-2 { grid-template-columns: 1fr; }
+    .sw-footer { grid-template-columns: 1fr; }
+    .sw-section-pad { padding-left: 18px !important; padding-right: 18px !important; }
+    .sw-hero { height: auto !important; min-height: 460px; }
+  }
+</style>
+</helmet>
+<div style="min-height:100vh;background:radial-gradient(1200px 600px at 80% -10%, rgba(247,127,28,0.10), transparent 60%), radial-gradient(900px 500px at -10% 20%, rgba(60,120,180,0.06), transparent 55%), #0b0d12;">
+
+  <header class="sw-header" style="position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:34px;padding:16px 40px;background:rgba(11,13,18,0.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07);">
+    <button type="button" onClick="{{ goHome }}" aria-label="Accueil Satisfactory Worlds" style="border:0;background:transparent;display:flex;align-items:center;gap:12px;cursor:pointer;">
+      <div style="width:34px;height:34px;position:relative;display:flex;align-items:center;justify-content:center;background:#f77f1c;transform:rotate(45deg);border-radius:6px;box-shadow:0 0 18px rgba(247,127,28,0.55);">
+        <span style="transform:rotate(-45deg);font-family:'Rajdhani';font-weight:700;color:#0b0d12;font-size:20px;">S</span>
+      </div>
+      <div style="line-height:1;">
+        <div style="font-family:'Rajdhani';font-weight:700;font-size:19px;letter-spacing:2px;color:#fff;">SATISFACTORY WORLDS</div>
+        <div style="font-family:'Barlow Semi Condensed';font-size:10px;letter-spacing:3px;color:#f77f1c;text-transform:uppercase;">Community Save Hub</div>
+      </div>
+    </button>
+    <nav class="sw-nav" aria-label="Navigation principale" style="display:flex;align-items:center;gap:6px;margin-left:10px;">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="4">
+        <button type="button" onClick="{{ item.go }}" aria-current="{{ item.current }}" style="border:0;padding:9px 15px;border-radius:8px;font-family:'Barlow Semi Condensed';font-weight:600;font-size:15px;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;color:{{ item.color }};background:{{ item.bg }};transition:all .18s;" style-hover="color:#fff;background:rgba(255,255,255,0.06);">{{ item.label }}</button>
+      </sc-for>
+    </nav>
+    <div style="flex:1;"></div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="{{ discordUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Rejoindre le serveur Discord (nouvel onglet)" style="display:flex;align-items:center;gap:9px;padding:9px 16px;border-radius:9px;background:#5865F2;color:#fff;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;transition:transform .16s, box-shadow .16s;" style-hover="transform:translateY(-1px);box-shadow:0 8px 22px rgba(88,101,242,0.4);">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M20.3 4.9A19 19 0 0 0 15.6 3.4l-.24.48a17.6 17.6 0 0 1 4.1 1.3 15.6 15.6 0 0 0-13-.02 17 17 0 0 1 4.1-1.3l-.24-.47A19 19 0 0 0 3.7 4.9C.9 9.1.15 13.2.53 17.2a19.2 19.2 0 0 0 5.8 2.94l.47-.66a12.6 12.6 0 0 1-1.86-.9l.36-.27a13.6 13.6 0 0 0 11.4 0l.36.27c-.6.36-1.22.66-1.86.9l.47.66a19.1 19.1 0 0 0 5.8-2.94c.45-4.66-.76-8.72-3.2-12.3ZM8.5 14.7c-1.13 0-2.06-1.04-2.06-2.3s.91-2.3 2.06-2.3 2.08 1.05 2.06 2.3c0 1.26-.92 2.3-2.06 2.3Zm7 0c-1.13 0-2.06-1.04-2.06-2.3s.9-2.3 2.06-2.3 2.08 1.05 2.06 2.3c0 1.26-.9 2.3-2.06 2.3Z"/></svg>
+        Discord
+      </a>
+      <button type="button" onClick="{{ goPublish }}" style="border:0;padding:10px 20px;border-radius:9px;background:linear-gradient(180deg,#ffa645,#f77f1c);color:#0b0d12;font-family:'Barlow Semi Condensed';font-weight:700;font-size:15px;letter-spacing:0.6px;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 18px rgba(247,127,28,0.4);transition:transform .16s;" style-hover="transform:translateY(-1px);">Publier</button>
+    </div>
+  </header>
+
+  <!-- ======================= ACCUEIL ======================= -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <main>
+    <section class="sw-hero" style="position:relative;height:640px;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="position:absolute;inset:0;">
+        <image-slot id="home-hero" shape="rect" placeholder="Déposez une capture d'usine (bannière)" aria-label="Bannière : capture d'usine Satisfactory"></image-slot>
+      </div>
+      <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg, rgba(11,13,18,0.96) 0%, rgba(11,13,18,0.78) 42%, rgba(11,13,18,0.25) 100%);"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg, #0b0d12 2%, transparent 40%);"></div>
+      <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:0 40px;height:100%;display:flex;flex-direction:column;justify-content:center;pointer-events:none;">
+        <div style="display:inline-flex;align-items:center;gap:9px;width:fit-content;padding:7px 14px;border-radius:999px;background:rgba(247,127,28,0.14);border:1px solid rgba(247,127,28,0.4);color:#ffa645;font-family:'Barlow Semi Condensed';font-weight:600;letter-spacing:1.5px;text-transform:uppercase;font-size:13px;margin-bottom:22px;animation:fadeUp .6s ease both;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#f77f1c;box-shadow:0 0 10px #f77f1c;"></span> Centre communautaire mondial
+        </div>
+        <h1 class="sw-hero-h1" style="font-family:'Rajdhani';font-weight:700;font-size:82px;line-height:0.98;margin:0;color:#fff;letter-spacing:-1px;text-shadow:0 4px 40px rgba(0,0,0,0.6);animation:fadeUp .6s ease .05s both;">SATISFACTORY<br><span style="color:#f77f1c;">WORLDS</span></h1>
+        <p style="max-width:560px;font-size:21px;line-height:1.45;color:#c3cbd8;margin:24px 0 36px;animation:fadeUp .6s ease .12s both;">La communauté vient d'ouvrir ses portes. Aucun monde n'a encore été publié — soyez le premier pionnier à partager votre usine.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;pointer-events:auto;animation:fadeUp .6s ease .18s both;">
+          <button type="button" onClick="{{ goExplorer }}" style="border:0;display:flex;align-items:center;gap:10px;padding:16px 30px;border-radius:11px;background:linear-gradient(180deg,#ffa645,#f77f1c);color:#0b0d12;font-family:'Barlow Semi Condensed';font-weight:700;font-size:19px;letter-spacing:0.6px;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 30px rgba(247,127,28,0.45);transition:transform .16s;" style-hover="transform:translateY(-2px);">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#0b0d12" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+            Explorer les mondes
+          </button>
+          <button type="button" onClick="{{ goPublish }}" style="display:flex;align-items:center;gap:10px;padding:16px 30px;border-radius:11px;background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.22);color:#fff;font-family:'Barlow Semi Condensed';font-weight:700;font-size:19px;letter-spacing:0.6px;text-transform:uppercase;cursor:pointer;transition:all .16s;" style-hover="border-color:#f77f1c;background:rgba(247,127,28,0.1);">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" aria-hidden="true"><path d="M12 16V4m0 0-5 5m5-5 5 5"/><path d="M4 18v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"/></svg>
+            Publier ma sauvegarde
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- hazard strip -->
+    <div style="height:8px;background-image:repeating-linear-gradient(45deg,#f77f1c 0,#f77f1c 20px,#0b0d12 20px,#0b0d12 40px);background-size:56px 100%;animation:hazardScroll 3s linear infinite;opacity:0.85;"></div>
+
+    <section class="sw-grid-4 sw-section-pad" style="max-width:1280px;margin:0 auto;padding:34px 40px;display:grid;gap:16px;">
+      <sc-for list="{{ heroStats }}" as="s" hint-placeholder-count="4">
+        <div style="padding:22px 24px;border-radius:14px;background:linear-gradient(180deg,#171c25,#12161d);border:1px solid rgba(255,255,255,0.07);">
+          <div style="font-family:'Rajdhani';font-weight:700;font-size:38px;color:#f77f1c;line-height:1;">{{ s.value }}</div>
+          <div style="color:#8a94a6;font-size:14px;letter-spacing:0.5px;text-transform:uppercase;margin-top:8px;font-family:'Barlow Semi Condensed';font-weight:600;">{{ s.label }}</div>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto;padding:12px 40px 70px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:5px;height:34px;background:#f77f1c;border-radius:3px;box-shadow:0 0 14px rgba(247,127,28,0.6);"></div>
+          <h2 style="font-family:'Rajdhani';font-weight:700;font-size:36px;margin:0;color:#fff;letter-spacing:0.5px;">Sauvegardes populaires</h2>
+          <sc-if value="{{ hasPopular }}"><span style="padding:4px 11px;border-radius:6px;background:#f77f1c;color:#0b0d12;font-family:'Barlow Semi Condensed';font-weight:700;font-size:12px;letter-spacing:1px;">HOT</span></sc-if>
+        </div>
+        <sc-if value="{{ hasPopular }}"><button type="button" onClick="{{ goExplorer }}" style="border:0;background:transparent;color:#ffa645;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:15px;" style-hover="color:#ffc178;">Voir tout <span style="font-size:18px;">→</span></button></sc-if>
+      </div>
+
+      <!-- État vide : aucune sauvegarde publiée au lancement -->
+      <sc-if value="{{ noPopular }}">
+      <div style="position:relative;overflow:hidden;border-radius:20px;background:linear-gradient(160deg,#1a1005,#12161d 62%);border:1px dashed rgba(247,127,28,0.4);padding:64px 40px;text-align:center;">
+        <div style="width:84px;height:84px;margin:0 auto 24px;border-radius:20px;background:rgba(247,127,28,0.12);border:1px solid rgba(247,127,28,0.4);display:flex;align-items:center;justify-content:center;transform:rotate(45deg);box-shadow:0 0 26px rgba(247,127,28,0.25);">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#f77f1c" stroke-width="2" aria-hidden="true" style="transform:rotate(-45deg);"><path d="M12 16V4m0 0-5 5m5-5 5 5"/><path d="M4 18v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"/></svg>
+        </div>
+        <div style="font-family:'Rajdhani';font-weight:700;font-size:34px;color:#fff;line-height:1.1;">Aucun monde publié pour l'instant</div>
+        <p style="color:#c3cbd8;font-size:18px;line-height:1.55;max-width:560px;margin:16px auto 30px;">La communauté vient d'ouvrir ses portes. Soyez le tout premier pionnier à partager votre usine avec le monde entier.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+          <button type="button" onClick="{{ goPublish }}" style="border:0;display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:11px;background:linear-gradient(180deg,#ffa645,#f77f1c);color:#0b0d12;font-family:'Barlow Semi Condensed';font-weight:700;font-size:18px;letter-spacing:0.6px;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 30px rgba(247,127,28,0.45);transition:transform .16s;" style-hover="transform:translateY(-2px);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0b0d12" stroke-width="2.4" aria-hidden="true"><path d="M12 16V4m0 0-5 5m5-5 5 5"/><path d="M4 18v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"/></svg>
+            Publier le premier monde
+          </button>
+          <button type="button" onClick="{{ goApp }}" style="display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:11px;background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.22);color:#fff;font-family:'Barlow Semi Condensed';font-weight:700;font-size:18px;letter-spacing:0.6px;text-transform:uppercase;cursor:pointer;transition:all .16s;" style-hover="border-color:#f77f1c;background:rgba(247,127,28,0.1);">Découvrir l'app</button>
+        </div>
+      </div>
+      </sc-if>
+
+      <div class="sw-grid-3" style="display:grid;gap:22px;">
+        <sc-for list="{{ popularSaves }}" as="save" hint-placeholder-count="6">
+          <div onClick="{{ save.open }}" onKeyDown="{{ save.onKey }}" role="button" tabindex="0" aria-label="{{ save.aria }}" style="position:relative;border-radius:16px;overflow:hidden;background:#141821;border:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s, border-color .22s;" style-hover="transform:translateY(-7px);box-shadow:0 22px 44px rgba(0,0,0,0.55), 0 0 0 1px rgba(247,127,28,0.4);border-color:rgba(247,127,28,0.4);">
+            <div style="position:relative;height:190px;">
+              <image-slot id="{{ save.slotId }}" shape="rect" placeholder="Capture de l'usine"></image-slot>
+              <div style="position:absolute;top:12px;left:12px;pointer-events:none;padding:5px 11px;border-radius:7px;background:rgba(11,13,18,0.82);backdrop-filter:blur(6px);border:1px solid {{ save.typeBorder }};color:{{ save.typeColor }};font-family:'Barlow Semi Condensed';font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;">{{ save.type }}</div>
+              <div style="position:absolute;top:12px;right:12px;pointer-events:none;display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:7px;background:rgba(11,13,18,0.82);backdrop-filter:blur(6px);color:#ffce6b;font-weight:700;font-size:13px;">★ {{ save.rating }}</div>
+              <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg, #141821 1%, transparent 45%);"></div>
+            </div>
+            <div style="padding:16px 18px 18px;">
+              <div style="font-family:'Rajdhani';font-weight:700;font-size:22px;color:#fff;line-height:1.1;">{{ save.name }}</div>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:9px;color:#8a94a6;font-size:14px;">
+                <span style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#f77f1c,#7a3d05);display:inline-flex;align-items:center;justify-content:center;font-family:'Rajdhani';font-weight:700;font-size:12px;color:#0b0d12;">{{ save.creatorInitial }}</span>
+                par <span style="color:#c3cbd8;font-weight:600;">{{ save.creator }}</span>
+              </div>
+              <div style="height:1px;background:rgba(255,255,255,0.07);margin:14px 0;"></div>
+              <div style="display:flex;justify-content:space-between;color:#8a94a6;font-size:13px;">
+                <div style="display:flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8a94a6" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>{{ save.playtime }}</div>
+                <div style="display:flex;align-items:center;gap:6px;color:#f77f1c;font-weight:700;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f77f1c" stroke-width="2"><path d="M12 16V4m0 12-4-4m4 4 4-4"/><path d="M4 20h16"/></svg>{{ save.downloads }}</div>
+                <div style="color:#6b7688;">{{ save.version }}</div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto 80px;padding:0 40px;">
+      <div style="position:relative;border-radius:20px;overflow:hidden;padding:56px 60px;background:linear-gradient(110deg,#1a1005,#12161d 60%);border:1px solid rgba(247,127,28,0.25);">
+        <div style="position:absolute;top:-40px;right:-40px;width:220px;height:220px;border:2px solid rgba(247,127,28,0.15);border-radius:50%;animation:spinSlow 26s linear infinite;"></div>
+        <div style="position:relative;max-width:640px;">
+          <h2 style="font-family:'Rajdhani';font-weight:700;font-size:40px;color:#fff;margin:0 0 14px;">Partagez en un clic depuis le jeu</h2>
+          <p style="color:#c3cbd8;font-size:18px;line-height:1.5;margin:0 0 28px;">Installez <strong style="color:#ffa645;">FicsitSaveManager</strong> et publiez vos mondes automatiquement. Détection locale, compression 7-Zip/LZ4, vérification d'intégrité et lien de partage — un simple .exe portable.</p>
+          <button type="button" onClick="{{ goApp }}" style="border:0;display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:11px;background:linear-gradient(180deg,#ffa645,#f77f1c);color:#0b0d12;font-family:'Barlow Semi Condensed';font-weight:700;font-size:17px;letter-spacing:0.6px;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 24px rgba(247,127,28,0.4);transition:transform .16s;" style-hover="transform:translateY(-2px);">Découvrir l'application →</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- ======================= EXPLORATEUR ======================= -->
+  <sc-if value="{{ isExplorer }}">
+  <main style="max-width:1360px;margin:0 auto;padding:36px 40px 80px;">
+    <div style="margin-bottom:26px;">
+      <h1 style="font-family:'Rajdhani';font-weight:700;font-size:46px;margin:0;color:#fff;">Explorateur de sauvegardes</h1>
+      <p style="color:#8a94a6;font-size:17px;margin:6px 0 0;">{{ explorerCount }} monde(s) disponible(s) — filtrez, triez et trouvez l'usine parfaite.</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;padding:6px 6px 6px 20px;border-radius:13px;background:#141821;border:1px solid rgba(255,255,255,0.1);margin-bottom:24px;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8a94a6" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+      <input value="{{ search }}" onInput="{{ onSearch }}" aria-label="Rechercher une usine" placeholder="Rechercher une usine..." style="flex:1;background:transparent;border:none;outline:none;color:#e8ebf0;font-family:'Barlow';font-size:18px;padding:12px 0;">
+      <sc-if value="{{ hasSearch }}"><button type="button" onClick="{{ clearSearch }}" aria-label="Effacer la recherche" style="border:0;background:transparent;color:#8a94a6;cursor:pointer;font-size:20px;padding:0 6px;" style-hover="color:#fff;">✕</button></sc-if>
+      <button type="button" onClick="{{ goExplorer }}" style="border:0;padding:11px 24px;border-radius:9px;background:linear-gradient(180deg,#ffa645,#f77f1c);color:#0b0d12;font-family:'Barlow Semi Condensed';font-weight:700;font-size:16px;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;">Rechercher</button>
+    </div>
+
+    <div class="sw-explorer" style="display:grid;gap:28px;align-items:start;">
+      <aside style="position:sticky;top:96px;border-radius:16px;background:#141821;border:1px solid rgba(255,255,255,0.07);padding:6px 22px 22px;">
+        <sc-for list="{{ filterGroups }}" as="group" hint-placeholder-count="4">
+          <div style="padding-top:20px;">
+            <div style="font-family:'Barlow Semi Condensed';font-weight:700;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#f77f1c;margin-bottom:13px;">{{ group.title }}</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+              <sc-for list="{{ group.options }}" as="opt" hint-placeholder-count="4">
+                <button type="button" onClick="{{ opt.toggle }}" aria-pressed="{{ opt.active }}" style="padding:7px 13px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;background:{{ opt.bg }};border:1px solid {{ opt.border }};color:{{ opt.color }};" style-hover="border-color:rgba(247,127,28,0.5);">{{ opt.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="height:1px;background:rgba(255,255,255,0.06);margin-top:20px;"></div>
+        </sc-for>
+      </aside>
+
+      <div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+          <div style="color:#8a94a6;font-size:15px;">Tri :</div>
+          <div style="display:flex;gap:8px;">
+            <sc-for list="{{ sortOptions }}" as="opt" hint-placeholder-count="3">
+              <button type="button" onClick="{{ opt.select }}" aria-pressed="{{ opt.active }}" style="padding:9px 16px;border-radius:9px;font-family:'Barlow Semi Condensed';font-weight:600;font-size:14px;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;transition:all .15s;background:{{ opt.bg }};color:{{ opt.color }};border:1px solid {{ opt.border }};">{{ opt.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div class="sw-grid-3" style="display:grid;gap:20px;">
+          <sc-for list="{{ explorerSaves }}" as="save" hint-placeholder-count="9">
+            <div onClick="{{ save.open }}" onKeyDown="{{ save.onKey }}" role="button" tabindex="0" aria-label="{{ save.aria }}" style="position:relative;border-radius:16px;overflow:hidden;background:#141821;border:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s, border-color .22s;" style-hover="transform:translateY(-7px);box-shadow:0 22px 44px rgba(0,0,0,0.55), 0 0 0 1px rgba(247,127,28,0.4);border-color:rgba(247,127,28,0.4);">
+              <div style="position:relative;height:170px;">
+                <image-slot id="{{ save.slotId }}" shape="rect" placeholder="Capture de l'usine"></image-slot>
+                <div style="position:absolute;top:11px;left:11px;pointer-events:none;padding:5px 10px;border-radius:7px;background:rgba(11,13,18,0.82);backdrop-filter:blur(6px);border:1px solid {{ save.typeBorder }};color:{{ save.typeColor }};font-family:'Barlow Semi Condensed';font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;">{{ save.type }}</div>
+                <div style="position:absolute;top:11px;right:11px;pointer-events:none;display:flex;align-items:center;gap:5px;padding:5px 9px;border-radius:7px;background:rgba(11,13,18,0.82);backdrop-filter:blur(6px);color:#ffce6b;font-weight:700;font-size:12px;">★ {{ save.rating }}</div>
+                <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg, #141821 1%, transparent 45%);"></div>
+              </div>
+              <div style="padding:14px 16px 16px;">
+                <div style="font-family:'Rajdhani';font-weight:700;font-size:19px;color:#fff;line-height:1.1;">{{ save.name }}</div>
+                <div style="color:#8a94a6;font-size:13px;margin-top:6px;">par <span style="color:#c3cbd8;font-weight:600;">{{ save.creator }}</span></div>
+                <div style="display:flex;justify-content:space-between;margin-top:12px;color:#8a94a6;font-size:12.5px;">
+                  <span>{{ save.playtime }}</span>
+                  <span style="color:#f77f1c;font-weight:700;">↓ {{ save.downloads }}</span>
+                  <span style="color:#6b7688;">{{ save.version }}</span>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ explorerEmpty }}">
+          <div style="text-align:center;padding:70px 20px;color:#8a94a6;">
+            <div style="font-family:'Rajdhani';font-weight:700;font-size:26px;color:#fff;margin-bottom:8px;">Aucun monde ne correspond</div>
+            <div style="font-size:15px;margin-bottom:20px;">Essayez d'élargir vos filtres ou de modifier votre recherche.</div>
+            <button type="button" onClick="{{ resetFilters }}" style="border:0;padding:11px 22px;border-radius:9px;background:linear-gradient(180deg,#ffa645,#f77f1c);color:#0b0d12;font-family:'Barlow Semi Condensed';font-weight:700;font-size:15px;text-transform:uppercase;cursor:pointer;">Réinitialiser les filtres</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ noWorlds }}">
+          <div style="grid-column:1 / -1;border-radius:20px;background:linear-gradient(160deg,#1a1005,#12161d 62%);border:1px dashed rgba(247,127,28,0.4);padding:64px 40px;text-align:center;">
+            <div style="width:84px;height:84px;margin:0 auto 24px;border-radius:20px;background:rgba(247,127,28,0.12);border:1px solid rgba(247,127,28,0.4);display:flex;align-items:center;justify-content:center;transform:rotate(45deg);box-shadow:0 0 26px rgba(247,127,28,0.25);">
+              <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#f77f1c" stroke-width="2" aria-hidden="true" style="transform:rotate(-45deg);"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+            </div>
+            <div style="font-family:'Rajdhani';font-weight:700;font-size:30px;color:#fff;line-height:1.1;">L'entrepôt est encore vide</div>
+            <p style="color:#c3cbd8;font-size:17px;line-height:1.55;max-width:520px;margin:16px auto 30px;">Aucune sauvegarde n'a été publiée sur Satisfactory Worlds pour le moment. Lancez le mouvement et déposez la première usine de l'histoire du site.</p>
+            <button type="button" onClick="{{ goPublish }}" style="border:0;display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:11px;background:linear-gradient(180deg,#ffa645,#f77f1c);color:#0b0d12;font-family:'Barlow Semi Condensed';font-weight:700;font-size:17px;letter-spacing:0.6px;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 30px rgba(247,127,28,0.45);transition:transform .16s;" style-hover="transform:translateY(-2px);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0b0d12" stroke-width="2.4" aria-hidden="true"><path d="M12 16V4m0 0-5 5m5-5 5 5"/><path d="M4 18v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"/></svg>
+              Publier ma sauvegarde
+            </button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </main>
+  </sc-if>
+
+  <!-- ======================= DETAIL ======================= -->
+  <sc-if value="{{ isDetail }}">
+  <main style="max-width:1280px;margin:0 auto;padding:24px 40px 80px;">
+    <button type="button" onClick="{{ goExplorer }}" style="border:0;background:transparent;display:inline-flex;align-items:center;gap:7px;color:#8a94a6;font-weight:600;font-size:15px;cursor:pointer;margin-bottom:20px;" style-hover="color:#ffa645;">← Retour à l'explorateur</button>
+    <div class="sw-detail" style="display:grid;gap:30px;align-items:start;">
+      <div>
+        <div style="position:relative;border-radius:18px;overflow:hidden;height:440px;border:1px solid rgba(255,255,255,0.08);">
+          <image-slot id="det-main" shape="rect" placeholder="Capture principale de l'usine" aria-label="Capture principale : {{ detailName }}"></image-slot>
+          <div style="position:absolute;top:16px;left:16px;pointer-events:none;padding:6px 13px;border-radius:8px;background:rgba(11,13,18,0.82);backdrop-filter:blur(6px);border:1px solid rgba(247,127,28,0.5);color:#f77f1c;font-family:'Barlow Semi Condensed';font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase;">{{ detailType }}</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px;">
+          <sc-for list="{{ detailShots }}" as="shot" hint-placeholder-count="4">
+            <div style="height:90px;border-radius:11px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);">
+              <image-slot id="{{ shot.id }}" shape="rect" placeholder="Screenshot"></image-slot>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:34px;">
+          <h3 style="font-family:'Rajdhani';font-weight:700;font-size:26px;color:#fff;margin:0 0 12px;display:flex;align-items:center;gap:12px;"><span style="width:4px;height:24px;background:#f77f1c;border-radius:2px;"></span>Description</h3>
+          <p style="color:#b9c2d0;font-size:16px;line-height:1.7;margin:0;">Bienvenue dans <strong style="color:#fff;">{{ detailName }}</strong>, une megabase pensée pour la production automatisée à grande échelle. Réseau ferroviaire complet, distribution d'énergie nucléaire redondante et lignes de production optimisées jusqu'aux pièces de fin de jeu. Chaque secteur est modulaire et étiqueté pour faciliter l'expansion.</p>
+        </div>
+
+        <div style="margin-top:30px;">
+          <h3 style="font-family:'Rajdhani';font-weight:700;font-size:26px;color:#fff;margin:0 0 14px;display:flex;align-items:center;gap:12px;"><span style="width:4px;height:24px;background:#f77f1c;border-radius:2px;"></span>Mods utilisés</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;">
+            <sc-for list="{{ detailMods }}" as="mod" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:8px;padding:9px 15px;border-radius:9px;background:#141821;border:1px solid rgba(255,255,255,0.1);color:#c3cbd8;font-size:14px;font-weight:600;">
+                <span style="width:7px;height:7px;border-radius:50%;background:#f77f1c;"></span>{{ mod }}
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:30px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+            <h3 style="font-family:'Rajdhani';font-weight:700;font-size:26px;color:#fff;margin:0;display:flex;align-items:center;gap:12px;"><span style="width:4px;height:24px;background:#f77f1c;border-radius:2px;"></span>Commentaires <span style="color:#8a94a6;font-weight:500;font-size:18px;">({{ detailComments.length }})</span></h3>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <sc-for list="{{ detailComments }}" as="c" hint-placeholder-count="3">
+              <div style="display:flex;gap:14px;padding:18px;border-radius:14px;background:#141821;border:1px solid rgba(255,255,255,0.07);">
+                <div style="flex-shrink:0;width:42px;height:42px;border-radius:50%;background:{{ c.avatarBg }};display:flex;align-items:center;justify-content:center;font-family:'Rajdhani';font-weight:700;font-size:17px;color:#0b0d12;">{{ c.initial }}</div>
+                <div style="flex:1;">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <span style="color:#fff;font-weight:700;font-size:15px;">{{ c.name }}</span>
+                    <span style="color:#ffce6b;font-size:13px;">{{ c.stars }}</span>
+                    <span style="color:#6b7688;font-size:13px;margin-left:auto;">{{ c.date }}</span>
+                  </div>
+                  <p style="color:#b9c2d0;font-size:15px;line-height:1.55;margin:8px 0 0;">{{ c.text }}</p>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <!-- side panel -->
+      <div class="sw-sticky" style="position:sticky;top:96px;">
+        <div style="border-radius:18px;background:linear-gradient(180deg,#171c25,#12161d);border:1px solid rgba(255,255,255,0.08);padding:26px;">
+          <h1 style="font-family:'Rajdhani';font-weight:700;font-size:34px;color:#fff;margin:0;line-height:1.05;">{{ detailName }}</h1>
+          <div onClick="{{ goProfile }}" onKeyDown="{{ onProfileKey }}" role="button" tabindex="0" aria-label="Voir le profil de {{ detailCreator }}" style="display:flex;align-items:center;gap:11px;margin-top:16px;cursor:pointer;padding:10px;border-radius:11px;transition:background .15s;" style-hover="background:rgba(255,255,255,0.04);">
+            <div style="width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid #f77f1c;"><image-slot id="det-avatar" shape="rect" placeholder="Avatar" aria-label="Avatar de {{ detailCreator }}"></image-slot></div>
+            <div>
+              <div style="color:#8a94a6;font-size:12px;text-transform:uppercase;letter-spacing:1px;">Créateur</div>
+              <div style="color:#fff;font-weight:700;font-size:18px;">{{ detailCreator }}</div>
+            </div>
+            <button type="button" onClick="{{ toggleFollow }}" aria-pressed="{{ following }}" style="margin-left:auto;padding:7px 14px;border-radius:8px;background:{{ followBg }};border:1px solid rgba(247,127,28,0.4);color:{{ followColor }};font-weight:600;font-size:13px;cursor:pointer;">{{ followLabel }}</button>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:10px;margin:20px 0;padding:14px;border-radius:12px;background:rgba(247,127,28,0.08);border:1px solid rgba(247,127,28,0.25);">
+            <div style="font-family:'Rajdhani';font-weight:700;font-size:40px;color:#ffce6b;line-height:1;">{{ detailRating }}</div>
+            <div>
+              <div style="color:#ffce6b;font-size:17px;">★★★★★</div>
+              <div style="color:#8a94a6;font-size:13px;margin-top:2px;">1 284 notes</div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
+            <sc-for list="{{ detailStats }}" as="st" hint-placeholder-count="6">
+              <div style="padding:14px;border-radius:12px;background:#0f131a;border:1px solid rgba(255,255,255,0.06);">
+                <div style="color:#8a94a6;font-size:12px;text-transform:uppercase;letter-spacing:0.8px;font-family:'Barlow Semi Condensed';font-weight:600;">{{ st.label }}</div>
+                <div style="font-family:'Rajdhani';font-weight:700;font-size:23px;color:#fff;margin-top:4px;">{{ st.value }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="border-radius:12px;background:#0f131a;border:1px solid rgba(255,255,255,0.06);padding:16px;margin-bottom:20px;">
+            <div style="font-family:'Barlow Semi Condensed';font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#f77f1c;margin-bottom:12px;">Production</div>
+            <sc-for list="{{ detailProduction }}" as="p" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                <span style="width:10px;height:10px;border-radius:2px;background:{{ p.color }};box-shadow:0 0 8px {{ p.color }};"></span>
+                <span style="color:#c3cbd8;font-size:15px;flex:1;">{{ p.label }}</span>
+                <span style="font-family:'Rajdhani';font-weight:700;font-size:17px;color:#fff;">{{ p.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+
+          <button type="button" onClick="{{ downloadSave }}" style="width:100%;border:0;display:flex;align-items:center;justify-content:center;gap:11px;padding:18px;border-radius:13px;background:linear-gradient(180deg,#ffa645,#f77f1c);color:#0b0d12;font-family:'Barlow Semi Condensed';font-weight:700;font-size:19px;letter-spacing:0.6px;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 28px rgba(247,127,28,0.45);animation:glowPulse 3s ease infinite;transition:transform .16s;" style-hover="transform:translateY(-2px);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0b0d12" stroke-width="2.4" aria-hidden="true"><path d="M12 16V4m0 12-5-5m5 5 5-5"/><path d="M4 20h16"/></svg>
+            Télécharger la sauvegarde
+          </button>
+          <div style="text-align:center;color:#8a94a6;font-size:13px;margin-top:10px;">{{ detailSize }} · fichier .sav · vérifié ✓</div>
+
+          <button type="button" onClick="{{ openInApp }}" style="width:100%;display:flex;align-items:center;justify-content:center;gap:9px;padding:13px;border-radius:11px;background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.15);color:#fff;font-weight:600;font-size:15px;cursor:pointer;margin-top:12px;transition:all .15s;" style-hover="border-color:#f77f1c;background:rgba(247,127,28,0.08);">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="#ffa645" aria-hidden="true"><path d="M3 12V6.75l6-1.32v6.48L3 12m17-9v8.75l-10 .15V5.21L20 3M3 13l6 .09v6.81l-6-1.15V13m17 .25V22l-10-1.91v-6.68l10 .09"/></svg>
+            Ouvrir avec FicsitSaveManager
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+  </sc-if>
+
+  <!-- ======================= PROFIL ======================= -->
+  <sc-if value="{{ isProfile }}">
+  <main>
+    <div style="position:relative;height:280px;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <image-slot id="prof-banner" shape="rect" placeholder="Bannière du profil"></image-slot>
+      <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,#0b0d12 4%,rgba(11,13,18,0.3) 60%,transparent);"></div>
+    </div>
+    <div style="max-width:1280px;margin:0 auto;padding:0 40px 80px;">
+      <div style="display:flex;align-items:flex-end;gap:26px;margin-top:-70px;position:relative;">
+        <div style="width:150px;height:150px;border-radius:20px;overflow:hidden;border:3px solid #f77f1c;box-shadow:0 12px 30px rgba(0,0,0,0.5);flex-shrink:0;"><image-slot id="prof-avatar" shape="rect" placeholder="Avatar"></image-slot></div>
+        <div style="flex:1;padding-bottom:8px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <h1 style="font-family:'Rajdhani';font-weight:700;font-size:44px;color:#fff;margin:0;">Seizo</h1>
+            <span style="padding:4px 11px;border-radius:6px;background:rgba(247,127,28,0.15);border:1px solid rgba(247,127,28,0.4);color:#ffa645;font-family:'Barlow Semi Condensed';font-weight:700;font-size:12px;letter-spacing:1px;">CRÉATEUR PRO ✓</span>
+          </div>
+          <p style="color:#b9c2d0;font-size:16px;max-width:620px;margin:10px 0 0;line-height:1.5;">Ingénieur FICSIT passionné de megabases nucléaires et de logistique ferroviaire. Je conçois des usines propres, modulaires et 100 % automatisées. Rejoignez plus de 40 000 pionniers.</p>
+        </div>
+        <div style="display:flex;gap:12px;padding-bottom:10px;">
+          <button type="button" onClick="{{ toggleFollow }}" aria-pressed="{{ following }}" style="border:0;padding:13px 26px;border-radius:11px;background:{{ followBg2 }};color:{{ followColor2 }};font-family:'Barlow Semi Condensed';font-weight:700;font-size:16px;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 22px rgba(247,127,28,0.4);">{{ followLabel }}</button>
+          <button type="button" onClick="{{ messageCreator }}" style="padding:13px 20px;border-radius:11px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.15);color:#fff;font-weight:600;font-size:16px;cursor:pointer;">Message</button>
+        </div>
+      </div>
+
+      <div class="sw-grid-3" style="display:grid;gap:16px;margin:40px 0;">
+        <sc-for list="{{ profileStats }}" as="s" hint-placeholder-count="3">
+          <div style="padding:26px 28px;border-radius:15px;background:linear-gradient(180deg,#171c25,#12161d);border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:18px;">
+            <div style="width:52px;height:52px;border-radius:13px;background:rgba(247,127,28,0.12);border:1px solid rgba(247,127,28,0.3);display:flex;align-items:center;justify-content:center;">{{ s.icon }}</div>
+            <div>
+              <div style="font-family:'Rajdhani';font-weight:700;font-size:34px;color:#f77f1c;line-height:1;">{{ s.value }}</div>
+              <div style="color:#8a94a6;font-size:14px;letter-spacing:0.5px;text-transform:uppercase;margin-top:4px;font-family:'Barlow Semi Condensed';font-weight:600;">{{ s.label }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
+        <div style="width:5px;height:30px;background:#f77f1c;border-radius:3px;"></div>
+        <h2 style="font-family:'Rajdhani';font-weight:700;font-size:32px;margin:0;color:#fff;">Ses créations</h2>
+      </div>
+      <div class="sw-grid-4" style="display:grid;gap:20px;">
+        <sc-for list="{{ profileSaves }}" as="save" hint-placeholder-count="4">
+          <div onClick="{{ save.open }}" onKeyDown="{{ save.onKey }}" role="button" tabindex="0" aria-label="{{ save.aria }}" style="position:relative;border-radius:15px;overflow:hidden;background:#141821;border:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:transform .22s, box-shadow .22s, border-color .22s;" style-hover="transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,0.5);border-color:rgba(247,127,28,0.4);">
+            <div style="position:relative;height:150px;">
+              <image-slot id="{{ save.slotId }}" shape="rect" placeholder="Usine" aria-label="{{ save.name }}"></image-slot>
+              <div style="position:absolute;top:10px;right:10px;pointer-events:none;display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:6px;background:rgba(11,13,18,0.82);color:#ffce6b;font-weight:700;font-size:12px;">★ {{ save.rating }}</div>
+            </div>
+            <div style="padding:13px 15px 15px;">
+              <div style="font-family:'Rajdhani';font-weight:700;font-size:18px;color:#fff;line-height:1.1;">{{ save.name }}</div>
+              <div style="display:flex;justify-content:space-between;margin-top:9px;color:#8a94a6;font-size:12.5px;">
+                <span>{{ save.type }}</span>
+                <span style="color:#f77f1c;font-weight:700;">↓ {{ save.downloads }}</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </main>
+  </sc-if>
+
+  <!-- ======================= PUBLICATION ======================= -->
+  <sc-if value="{{ isPublish }}">
+  <main style="max-width:940px;margin:0 auto;padding:40px 40px 90px;">
+    <div style="text-align:center;margin-bottom:38px;">
+      <h1 style="font-family:'Rajdhani';font-weight:700;font-size:48px;color:#fff;margin:0;">Publier ma sauvegarde</h1>
+      <p style="color:#8a94a6;font-size:18px;margin:8px 0 0;">Partagez votre monde avec la communauté mondiale en quelques étapes.</p>
+    </div>
+
+    <label style="display:block;border:2px dashed rgba(247,127,28,0.5);border-radius:18px;background:rgba(247,127,28,0.05);padding:44px;text-align:center;margin-bottom:30px;cursor:pointer;transition:all .18s;" style-hover="background:rgba(247,127,28,0.09);border-color:#f77f1c;">
+      <input type="file" accept=".sav" onChange="{{ onFilePick }}" aria-label="Choisir un fichier de sauvegarde .sav" style="position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;">
+      <div style="width:70px;height:70px;margin:0 auto 18px;border-radius:16px;background:rgba(247,127,28,0.14);border:1px solid rgba(247,127,28,0.4);display:flex;align-items:center;justify-content:center;">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#f77f1c" stroke-width="2" aria-hidden="true"><path d="M12 16V4m0 0-5 5m5-5 5 5"/><path d="M4 18v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"/></svg>
+      </div>
+      <div style="font-family:'Rajdhani';font-weight:700;font-size:24px;color:#fff;">{{ dropTitle }}</div>
+      <div style="color:#8a94a6;font-size:15px;margin-top:8px;">ou cliquez pour parcourir · taille max 500 MB · scan de sécurité automatique</div>
+      <div style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:6px 14px;border-radius:8px;background:rgba(60,180,120,0.12);border:1px solid rgba(60,180,120,0.4);color:#5fd39a;font-size:13px;font-weight:600;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5fd39a" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Fichiers protégés & analysés
+      </div>
+    </label>
+
+    <div style="border-radius:18px;background:linear-gradient(180deg,#171c25,#12161d);border:1px solid rgba(255,255,255,0.07);padding:34px;">
+      <div class="sw-form-2" style="display:grid;gap:22px;">
+        <div style="grid-column:1 / -1;">
+          <label style="display:block;font-family:'Barlow Semi Condensed';font-weight:700;font-size:14px;letter-spacing:0.8px;text-transform:uppercase;color:#ffa645;margin-bottom:9px;">Nom du monde</label>
+          <input placeholder="ex. Mega Nuclear Factory" style="width:100%;background:#0f131a;border:1px solid rgba(255,255,255,0.12);border-radius:11px;padding:14px 16px;color:#e8ebf0;font-family:'Barlow';font-size:16px;outline:none;">
+        </div>
+        <div style="grid-column:1 / -1;">
+          <label style="display:block;font-family:'Barlow Semi Condensed';font-weight:700;font-size:14px;letter-spacing:0.8px;text-transform:uppercase;color:#ffa645;margin-bottom:9px;">Description</label>
+          <textarea placeholder="Décrivez votre usine, son concept, ce qui la rend unique..." style="width:100%;min-height:120px;resize:vertical;background:#0f131a;border:1px solid rgba(255,255,255,0.12);border-radius:11px;padding:14px 16px;color:#e8ebf0;font-family:'Barlow';font-size:16px;outline:none;line-height:1.5;"></textarea>
+        </div>
+        <div>
+          <label style="display:block;font-family:'Barlow Semi Condensed';font-weight:700;font-size:14px;letter-spacing:0.8px;text-transform:uppercase;color:#ffa645;margin-bottom:9px;">Temps de jeu</label>
+          <input placeholder="ex. 500 heures" style="width:100%;background:#0f131a;border:1px solid rgba(255,255,255,0.12);border-radius:11px;padding:14px 16px;color:#e8ebf0;font-family:'Barlow';font-size:16px;outline:none;">
+        </div>
+        <div>
+          <label style="display:block;font-family:'Barlow Semi Condensed';font-weight:700;font-size:14px;letter-spacing:0.8px;text-transform:uppercase;color:#ffa645;margin-bottom:9px;">Version du jeu</label>
+          <div style="position:relative;">
+            <select style="width:100%;appearance:none;background:#0f131a;border:1px solid rgba(255,255,255,0.12);border-radius:11px;padding:14px 16px;color:#e8ebf0;font-family:'Barlow';font-size:16px;outline:none;cursor:pointer;">
+              <option>Satisfactory 1.0+</option><option>Update 8</option><option>Update 7</option>
+            </select>
+            <span style="position:absolute;right:16px;top:50%;transform:translateY(-50%);color:#8a94a6;pointer-events:none;">▾</span>
+          </div>
+        </div>
+        <div style="grid-column:1 / -1;">
+          <label style="display:block;font-family:'Barlow Semi Condensed';font-weight:700;font-size:14px;letter-spacing:0.8px;text-transform:uppercase;color:#ffa645;margin-bottom:9px;">Mods utilisés</label>
+          <input placeholder="ex. Smart!, Area Actions, Micro Manage (séparés par des virgules)" style="width:100%;background:#0f131a;border:1px solid rgba(255,255,255,0.12);border-radius:11px;padding:14px 16px;color:#e8ebf0;font-family:'Barlow';font-size:16px;outline:none;">
+        </div>
+        <div style="grid-column:1 / -1;">
+          <label style="display:block;font-family:'Barlow Semi Condensed';font-weight:700;font-size:14px;letter-spacing:0.8px;text-transform:uppercase;color:#ffa645;margin-bottom:9px;">Tags</label>
+          <div style="display:flex;flex-wrap:wrap;gap:9px;">
+            <sc-for list="{{ publishTags }}" as="tag" hint-placeholder-count="6">
+              <button type="button" onClick="{{ tag.toggle }}" aria-pressed="{{ tag.active }}" style="padding:8px 15px;border-radius:9px;background:{{ tag.bg }};border:1px solid {{ tag.border }};color:{{ tag.color }};font-size:14px;font-weight:600;cursor:pointer;">{{ tag.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="grid-column:1 / -1;">
+          <label style="display:block;font-family:'Barlow Semi Condensed';font-weight:700;font-size:14px;letter-spacing:0.8px;text-transform:uppercase;color:#ffa645;margin-bottom:9px;">Screenshots</label>
+          <div class="sw-grid-3" style="display:grid;gap:12px;">
+            <div style="height:120px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);"><image-slot id="pub-shot1" shape="rect" placeholder="+ Screenshot"></image-slot></div>
+            <div style="height:120px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);"><image-slot id="pub-shot2" shape="rect" placeholder="+ Screenshot"></image-slot></div>
+            <div style="height:120px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);"><image-slot id="pub-shot3" shape="rect" placeholder="+ Screenshot"></image-slot></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- auto analysis -->
+    <div style="margin-top:26px;border-radius:18px;background:linear-gradient(120deg,#1a1005,#12161d 65%);border:1px solid rgba(247,127,28,0.25);padding:30px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+        <div style="width:34px;height:34px;border-radius:9px;background:rgba(247,127,28,0.15);display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f77f1c" stroke-width="2"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6l1.4 1.4m10 10 1.4 1.4m0-12.8-1.4 1.4m-10 10-1.4 1.4"/></svg></div>
+        <h3 style="font-family:'Rajdhani';font-weight:700;font-size:24px;color:#fff;margin:0;">Analyse automatique de la sauvegarde</h3>
+      </div>
+      <p style="color:#8a94a6;font-size:15px;margin:0 0 22px;">Après l'upload, votre fichier .sav est analysé pour extraire automatiquement ces données.</p>
+      <div class="sw-grid-5" style="display:grid;gap:12px;">
+        <sc-for list="{{ analysisFields }}" as="f" hint-placeholder-count="5">
+          <div style="padding:16px;border-radius:12px;background:#0f131a;border:1px solid rgba(255,255,255,0.06);">
+            <div style="color:#8a94a6;font-size:12px;text-transform:uppercase;letter-spacing:0.6px;font-family:'Barlow Semi Condensed';font-weight:600;line-height:1.2;">{{ f.label }}</div>
+            <div style="font-family:'Rajdhani';font-weight:700;font-size:24px;color:#f77f1c;margin-top:8px;">{{ f.value }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;justify-content:flex-end;gap:14px;margin-top:28px;">
+      <button type="button" onClick="{{ saveDraft }}" style="padding:15px 26px;border-radius:11px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.15);color:#fff;font-weight:600;font-size:16px;cursor:pointer;">Enregistrer en brouillon</button>
+      <button type="button" onClick="{{ publishWorld }}" style="border:0;display:flex;align-items:center;gap:10px;padding:15px 34px;border-radius:11px;background:linear-gradient(180deg,#ffa645,#f77f1c);color:#0b0d12;font-family:'Barlow Semi Condensed';font-weight:700;font-size:18px;letter-spacing:0.6px;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 28px rgba(247,127,28,0.4);transition:transform .16s;" style-hover="transform:translateY(-2px);">Publier le monde →</button>
+    </div>
+  </main>
+  </sc-if>
+
+  <!-- ======================= APP WINDOWS ======================= -->
+  <sc-if value="{{ isApp }}">
+  <main>
+    <section class="sw-app-hero sw-section-pad" style="max-width:1280px;margin:0 auto;padding:56px 40px 20px;display:grid;gap:50px;align-items:center;">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:9px;padding:7px 14px;border-radius:999px;background:rgba(247,127,28,0.14);border:1px solid rgba(247,127,28,0.4);color:#ffa645;font-family:'Barlow Semi Condensed';font-weight:600;letter-spacing:1.5px;text-transform:uppercase;font-size:13px;margin-bottom:22px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#ffa645" aria-hidden="true"><path d="M3 12V6.75l6-1.32v6.48L3 12m17-9v8.75l-10 .15V5.21L20 3M3 13l6 .09v6.81l-6-1.15V13m17 .25V22l-10-1.91v-6.68l10 .09"/></svg>
+          Application Windows · Portable
+        </div>
+        <h1 style="font-family:'Rajdhani';font-weight:700;font-size:clamp(40px,7vw,60px);line-height:1;color:#fff;margin:0;">Ficsit<span style="color:#f77f1c;">SaveManager</span></h1>
+        <p style="color:#c3cbd8;font-size:20px;line-height:1.5;margin:22px 0 32px;max-width:520px;">Le pont entre votre PC et Satisfactory Worlds. Un seul <strong style="color:#ffa645;">.exe portable</strong>, aucune installation : détection de vos sauvegardes, compression 7-Zip/LZ4, vérification d'intégrité, partage et chargement en un clic.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;">
+          <button type="button" onClick="{{ downloadApp }}" style="border:0;display:flex;align-items:center;gap:11px;padding:16px 28px;border-radius:12px;background:linear-gradient(180deg,#ffa645,#f77f1c);color:#0b0d12;font-family:'Barlow Semi Condensed';font-weight:700;font-size:18px;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 28px rgba(247,127,28,0.45);transition:transform .16s;" style-hover="transform:translateY(-2px);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#0b0d12" aria-hidden="true"><path d="M3 12V6.75l6-1.32v6.48L3 12m17-9v8.75l-10 .15V5.21L20 3M3 13l6 .09v6.81l-6-1.15V13m17 .25V22l-10-1.91v-6.68l10 .09"/></svg>
+            Télécharger le .exe
+          </button>
+          <div style="padding:16px 24px;border-radius:12px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.15);color:#fff;font-weight:600;font-size:18px;">Portable · 9,7 Mo · sans installation</div>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <div style="position:absolute;inset:-30px;background:radial-gradient(circle at 60% 40%,rgba(247,127,28,0.25),transparent 65%);filter:blur(20px);"></div>
+        <div style="position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.12);box-shadow:0 30px 70px rgba(0,0,0,0.6);">
+          <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:#1a1f29;border-bottom:1px solid rgba(255,255,255,0.08);">
+            <span style="display:flex;align-items:center;gap:8px;color:#c3cbd8;font-size:13px;font-weight:600;"><span style="width:16px;height:16px;border-radius:4px;background:#f77f1c;display:inline-flex;align-items:center;justify-content:center;color:#0b0d12;font-family:'Rajdhani';font-weight:700;font-size:11px;">F</span>FicsitSaveManager</span>
+            <span style="flex:1;"></span>
+            <span style="color:#8a94a6;font-size:15px;letter-spacing:2px;font-family:monospace;">—&#9633;&#10005;</span>
+          </div>
+          <div style="height:360px;"><image-slot id="app-screen" shape="rect" placeholder="Capture de l'application FicsitSaveManager" aria-label="Capture de l'application FicsitSaveManager"></image-slot></div>
+        </div>
+      </div>
+    </section>
+
+    <div style="height:8px;background-image:repeating-linear-gradient(45deg,#f77f1c 0,#f77f1c 20px,#0b0d12 20px,#0b0d12 40px);background-size:56px 100%;animation:hazardScroll 3s linear infinite;opacity:0.85;margin:40px 0;"></div>
+
+    <section style="max-width:1280px;margin:0 auto;padding:20px 40px;">
+      <div style="text-align:center;margin-bottom:16px;">
+        <h2 style="font-family:'Rajdhani';font-weight:700;font-size:38px;color:#fff;margin:0;">Deux directions, zéro friction</h2>
+      </div>
+      <div class="sw-app-cols" style="display:grid;gap:24px;margin-top:36px;">
+        <div style="border-radius:18px;background:linear-gradient(180deg,#171c25,#12161d);border:1px solid rgba(255,255,255,0.08);padding:32px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;">
+            <div style="width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,#ffa645,#f77f1c);display:flex;align-items:center;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0b0d12" stroke-width="2.2" aria-hidden="true"><path d="M12 16V4m0 0-5 5m5-5 5 5"/><path d="M4 18v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"/></svg></div>
+            <h3 style="font-family:'Rajdhani';font-weight:700;font-size:24px;color:#fff;margin:0;">Depuis l'application</h3>
+          </div>
+          <div style="display:inline-block;padding:8px 16px;border-radius:9px;background:linear-gradient(180deg,#ffa645,#f77f1c);color:#0b0d12;font-family:'Barlow Semi Condensed';font-weight:700;font-size:15px;text-transform:uppercase;margin-bottom:22px;">Partager ma sauvegarde</div>
+          <sc-for list="{{ appUpSteps }}" as="step" hint-placeholder-count="4">
+            <div style="display:flex;gap:14px;margin-bottom:18px;">
+              <div style="flex-shrink:0;width:30px;height:30px;border-radius:8px;background:rgba(247,127,28,0.14);border:1px solid rgba(247,127,28,0.4);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani';font-weight:700;color:#ffa645;">{{ step.n }}</div>
+              <div>
+                <div style="color:#fff;font-weight:700;font-size:16px;">{{ step.title }}</div>
+                <div style="color:#8a94a6;font-size:14px;margin-top:3px;line-height:1.45;">{{ step.desc }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="border-radius:18px;background:linear-gradient(180deg,#171c25,#12161d);border:1px solid rgba(255,255,255,0.08);padding:32px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;">
+            <div style="width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,#ffa645,#f77f1c);display:flex;align-items:center;justify-content:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0b0d12" stroke-width="2.2"><path d="M12 4v12m0 0-5-5m5 5 5-5"/><path d="M4 20h16"/></svg></div>
+            <h3 style="font-family:'Rajdhani';font-weight:700;font-size:24px;color:#fff;margin:0;">Depuis le site</h3>
+          </div>
+          <div style="display:inline-block;padding:8px 16px;border-radius:9px;background:rgba(247,127,28,0.14);border:1px solid rgba(247,127,28,0.4);color:#ffa645;font-family:'Barlow Semi Condensed';font-weight:700;font-size:15px;text-transform:uppercase;margin-bottom:22px;">Ouvrir avec FicsitSaveManager</div>
+          <sc-for list="{{ appDownSteps }}" as="step" hint-placeholder-count="4">
+            <div style="display:flex;gap:14px;margin-bottom:18px;">
+              <div style="flex-shrink:0;width:30px;height:30px;border-radius:8px;background:rgba(247,127,28,0.14);border:1px solid rgba(247,127,28,0.4);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani';font-weight:700;color:#ffa645;">{{ step.n }}</div>
+              <div>
+                <div style="color:#fff;font-weight:700;font-size:16px;">{{ step.title }}</div>
+                <div style="color:#8a94a6;font-size:14px;margin-top:3px;line-height:1.45;">{{ step.desc }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:60px auto 0;padding:0 40px;">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
+        <div style="width:5px;height:30px;background:#f77f1c;border-radius:3px;"></div>
+        <h2 style="font-family:'Rajdhani';font-weight:700;font-size:32px;margin:0;color:#fff;">Sécurité & confiance</h2>
+      </div>
+      <div class="sw-grid-3" style="display:grid;gap:20px;">
+        <sc-for list="{{ securityFeatures }}" as="f" hint-placeholder-count="3">
+          <div style="padding:26px;border-radius:15px;background:#141821;border:1px solid rgba(255,255,255,0.07);">
+            <div style="width:46px;height:46px;border-radius:12px;background:rgba(60,180,120,0.12);border:1px solid rgba(60,180,120,0.35);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5fd39a" stroke-width="2"><path d="M12 3 4 6v6c0 5 3.5 7.5 8 9 4.5-1.5 8-4 8-9V6l-8-3Z"/></svg>
+            </div>
+            <div style="font-family:'Rajdhani';font-weight:700;font-size:20px;color:#fff;">{{ f.title }}</div>
+            <p style="color:#8a94a6;font-size:15px;line-height:1.5;margin:8px 0 0;">{{ f.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- ======================= FOOTER ======================= -->
+  <footer style="border-top:1px solid rgba(255,255,255,0.07);margin-top:20px;background:#0a0c10;">
+    <div class="sw-footer sw-section-pad" style="max-width:1280px;margin:0 auto;padding:44px 40px;display:grid;gap:40px;">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+          <div style="width:30px;height:30px;background:#f77f1c;transform:rotate(45deg);border-radius:6px;display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(-45deg);font-family:'Rajdhani';font-weight:700;color:#0b0d12;font-size:17px;">S</span></div>
+          <div style="font-family:'Rajdhani';font-weight:700;font-size:18px;letter-spacing:2px;color:#fff;">SATISFACTORY WORLDS</div>
+        </div>
+        <p style="color:#9aa4b4;font-size:14px;line-height:1.6;max-width:340px;margin:0;">Le plus grand centre communautaire de partage de sauvegardes Satisfactory. Non affilié à Coffee Stain Studios.</p>
+      </div>
+      <sc-for list="{{ footerCols }}" as="col" hint-placeholder-count="3">
+        <nav aria-label="{{ col.title }}">
+          <div style="font-family:'Barlow Semi Condensed';font-weight:700;font-size:14px;letter-spacing:1px;text-transform:uppercase;color:#fff;margin-bottom:14px;">{{ col.title }}</div>
+          <sc-for list="{{ col.links }}" as="link" hint-placeholder-count="4">
+            <button type="button" onClick="{{ link.go }}" style="display:block;border:0;background:transparent;text-align:left;color:#9aa4b4;font-size:14px;margin-bottom:9px;cursor:pointer;transition:color .15s;" style-hover="color:#ffa645;">{{ link.label }}</button>
+          </sc-for>
+        </nav>
+      </sc-for>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.06);padding:20px 40px;text-align:center;color:#7b8698;font-size:13px;">© 2026 Satisfactory Worlds · Frontend React + TypeScript · Backend Node.js · PostgreSQL · Cloud Storage</div>
+  </footer>
+
+  <sc-if value="{{ hasToast }}">
+    <div role="status" aria-live="polite" style="position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:200;display:flex;align-items:center;gap:12px;padding:14px 22px;border-radius:12px;background:linear-gradient(180deg,#171c25,#12161d);border:1px solid rgba(247,127,28,0.5);box-shadow:0 14px 40px rgba(0,0,0,0.6);color:#fff;font-weight:600;font-size:15px;animation:toastIn .25s ease both;">
+      <span style="width:9px;height:9px;border-radius:50%;background:#f77f1c;box-shadow:0 0 10px #f77f1c;"></span>
+      {{ toast }}
+      <button type="button" onClick="{{ dismissToast }}" aria-label="Fermer" style="border:0;background:transparent;color:#8a94a6;cursor:pointer;font-size:18px;margin-left:6px;" style-hover="color:#fff;">✕</button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1360,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { page: 'home', filters: {}, sort: 'downloads', search: '', selected: null, following: false, publishSel: { 'Nucléaire': true, 'Automatisation': true }, fileName: '', toast: null };
+
+  DISCORD_URL = 'https://discord.gg/satisfactory-worlds'; // ← à remplacer par votre vraie invitation
+
+  go(p) { this.setState({ page: p }); if (typeof window !== 'undefined') window.scrollTo(0, 0); }
+  toggleFilter(l) { this.setState(s => { const f = { ...s.filters }; f[l] = !f[l]; return { filters: f }; }); }
+  resetFilters() { this.setState({ filters: {}, search: '' }); }
+
+  // Retour visuel léger (pas de backend en maquette)
+  notify(msg) { this.setState({ toast: msg }); if (typeof window !== 'undefined') { clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: null }), 2800); } }
+  dismissToast() { if (typeof window !== 'undefined') clearTimeout(this._t); this.setState({ toast: null }); }
+
+  // Active un handler au clavier (Entrée / Espace) sur les éléments role="button"
+  key(fn) { return (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fn(); } }; }
+
+  num(v) { const s = String(v).replace(',', '.'); const n = parseFloat(s); if (/m/i.test(s)) return n * 1e6; if (/k/i.test(s)) return n * 1e3; return n || 0; }
+  normVer(v) { return v === 'v1.0+' ? 'Satisfactory 1.0+' : v; }
+  resOf(s) { const r = ['Fer', 'Cuivre']; if (s.type === 'Megabase' || s.type === 'End Game') r.push('Pétrole', 'Uranium'); else if (s.type === 'Mid Game') r.push('Pétrole'); return r; }
+  modOf(s) { return s.version === 'Update 8'; }
+
+  applyFilters(list) {
+    const f = this.state.filters;
+    const groups = {
+      Type: ['Débutant', 'Mid Game', 'End Game', 'Megabase', 'Défi'],
+      Ressources: ['Fer', 'Cuivre', 'Pétrole', 'Uranium'],
+      Version: ['Update 8', 'Satisfactory 1.0+'],
+    };
+    return list.filter(s => {
+      const selType = groups.Type.filter(o => f[o]);
+      if (selType.length && !selType.includes(s.type)) return false;
+      const selRes = groups.Ressources.filter(o => f[o]);
+      if (selRes.length && !selRes.some(r => this.resOf(s).includes(r))) return false;
+      const selVer = groups.Version.filter(o => f[o]);
+      if (selVer.length && !selVer.includes(this.normVer(s.version))) return false;
+      if (f['Avec mods'] && !f['Sans mods'] && !this.modOf(s)) return false;
+      if (f['Sans mods'] && !f['Avec mods'] && this.modOf(s)) return false;
+      return true;
+    });
+  }
+  applySearch(list) { const q = this.state.search.trim().toLowerCase(); if (!q) return list; return list.filter(s => (s.name + ' ' + s.creator).toLowerCase().includes(q)); }
+  applySort(list) {
+    const k = this.state.sort, a = list.slice();
+    if (k === 'downloads') a.sort((x, y) => this.num(y.downloads) - this.num(x.downloads));
+    else if (k === 'rated') a.sort((x, y) => parseFloat(y.rating) - parseFloat(x.rating));
+    else if (k === 'recent') a.sort((x, y) => (y._added || 0) - (x._added || 0));
+    return a;
+  }
+
+  onSearch(e) { this.setState({ search: e.target.value }); }
+  clearSearch() { this.setState({ search: '' }); }
+  openSave(s) { this.setState({ selected: s }); this.go('detail'); }
+  toggleFollow(e) { if (e && e.stopPropagation) e.stopPropagation(); this.setState(s => ({ following: !s.following })); }
+  togglePubTag(t) { this.setState(s => { const p = { ...s.publishSel }; p[t] = !p[t]; return { publishSel: p }; }); }
+  onFilePick(e) { const f = e.target.files && e.target.files[0]; this.setState({ fileName: f ? f.name : '' }); if (f) this.notify('Fichier « ' + f.name + ' » prêt à être analysé.'); }
+  downloadSave() { const n = (this.state.selected && this.state.selected.name) || 'la sauvegarde'; this.notify('Téléchargement de « ' + n + ' » démarré… (démo)'); }
+  openInApp() { this.notify('Ouverture dans FicsitSaveManager… (lien ficsitsavemanager://, démo)'); }
+  downloadApp() { this.notify('Téléchargement de FicsitSaveManager.exe démarré… (démo)'); }
+  messageCreator() { this.notify('Messagerie bientôt disponible.'); }
+  saveDraft() { this.notify('Brouillon enregistré.'); }
+  publishWorld() { this.notify('Monde envoyé pour analyse et publication ! (démo)'); }
+
+  // Lancement du site : aucune sauvegarde n'a encore été publiée par la communauté.
+  POPULAR = [];
+  EXPLORER = [];
+  PROFILE = [];
+
+  typeStyle(t) {
+    const map = {
+      'Débutant': ['#5fd39a', 'rgba(60,180,120,0.5)'],
+      'Mid Game': ['#6bb8ff', 'rgba(60,140,220,0.5)'],
+      'End Game': ['#ffa645', 'rgba(247,127,28,0.5)'],
+      'Megabase': ['#ff7bd0', 'rgba(220,80,180,0.5)'],
+      'Défi': ['#ffce6b', 'rgba(220,180,60,0.5)'],
+    };
+    return map[t] || ['#ffa645', 'rgba(247,127,28,0.5)'];
+  }
+  decorate(s, slotId, added) {
+    const [tc, tb] = this.typeStyle(s.type);
+    const it = { ...s, slotId, _added: added, typeColor: tc, typeBorder: tb, creatorInitial: (s.creator || 'S')[0].toUpperCase() };
+    it.open = () => this.openSave(it);
+    it.onKey = this.key(it.open);
+    it.aria = 'Ouvrir ' + s.name + (s.creator ? ' par ' + s.creator : '') + ', type ' + s.type + ', note ' + s.rating + (s.downloads ? ', ' + s.downloads + ' téléchargements' : '');
+    return it;
+  }
+
+  renderVals() {
+    const p = this.state.page;
+    const navItems = [
+      { key: 'home', label: 'Accueil' }, { key: 'explorer', label: 'Explorer' },
+      { key: 'publish', label: 'Publier' }, { key: 'app', label: 'App Windows' },
+    ].map(n => ({
+      label: n.label, go: () => this.go(n.key),
+      current: p === n.key ? 'page' : undefined,
+      color: p === n.key ? '#f77f1c' : '#c3cbd8',
+      bg: p === n.key ? 'rgba(247,127,28,0.12)' : 'transparent',
+    }));
+
+    const filterDefs = [
+      { title: 'Type', options: ['Débutant', 'Mid Game', 'End Game', 'Megabase', 'Défi'] },
+      { title: 'Ressources', options: ['Fer', 'Cuivre', 'Pétrole', 'Uranium'] },
+      { title: 'Version', options: ['Update 8', 'Satisfactory 1.0+'] },
+      { title: 'Mods', options: ['Sans mods', 'Avec mods'] },
+    ];
+    const filterGroups = filterDefs.map(g => ({
+      title: g.title,
+      options: g.options.map(o => {
+        const active = !!this.state.filters[o];
+        return {
+          label: o, toggle: () => this.toggleFilter(o), active,
+          bg: active ? 'rgba(247,127,28,0.16)' : '#0f131a',
+          border: active ? 'rgba(247,127,28,0.6)' : 'rgba(255,255,255,0.1)',
+          color: active ? '#ffa645' : '#c3cbd8',
+        };
+      }),
+    }));
+
+    const sortDefs = [{ key: 'downloads', label: 'Plus téléchargé' }, { key: 'rated', label: 'Mieux noté' }, { key: 'recent', label: 'Plus récent' }];
+    const sortOptions = sortDefs.map(s => {
+      const active = this.state.sort === s.key;
+      return {
+        label: s.label, select: () => this.setState({ sort: s.key }), active,
+        bg: active ? 'linear-gradient(180deg,#ffa645,#f77f1c)' : '#141821',
+        color: active ? '#0b0d12' : '#c3cbd8',
+        border: active ? 'transparent' : 'rgba(255,255,255,0.1)',
+      };
+    });
+
+    const publishTagDefs = ['Nucléaire', 'Ferroviaire', 'Automatisation', 'Esthétique', 'Compact', 'Débutant', 'Blueprints', 'Vanilla'];
+    const publishTags = publishTagDefs.map(t => {
+      const on = !!this.state.publishSel[t];
+      return {
+        label: t, toggle: () => this.togglePubTag(t), active: on,
+        bg: on ? 'rgba(247,127,28,0.16)' : '#0f131a',
+        border: on ? 'rgba(247,127,28,0.6)' : 'rgba(255,255,255,0.12)',
+        color: on ? '#ffa645' : '#c3cbd8',
+      };
+    });
+
+    const N = this.EXPLORER.length;
+    const explorerAll = this.EXPLORER.map((s, i) => this.decorate(s, 'exp' + i, N - i));
+    const explorerSaves = this.applySort(this.applySearch(this.applyFilters(explorerAll)));
+    const hasWorlds = this.EXPLORER.length > 0;      // au moins une sauvegarde publiée
+    const hasPopular = this.POPULAR.length > 0;
+    const sel = this.state.selected || explorerAll[0] || {}; // pas de save => objet vide
+    const following = this.state.following;
+    const linkMap = { 'Explorer': 'explorer', 'Publier': 'publish', 'FicsitSaveManager': 'app' };
+    const mkLinks = (arr) => arr.map(l => ({ label: l, go: linkMap[l] ? () => this.go(linkMap[l]) : () => this.notify('« ' + l + ' » — bientôt disponible.') }));
+
+    return {
+      isHome: p === 'home', isExplorer: p === 'explorer', isDetail: p === 'detail',
+      isProfile: p === 'profile', isPublish: p === 'publish', isApp: p === 'app',
+      goHome: () => this.go('home'), goExplorer: () => this.go('explorer'),
+      goPublish: () => this.go('publish'), goApp: () => this.go('app'),
+      goProfile: () => this.go('profile'),
+      discordUrl: this.DISCORD_URL,
+      hasToast: !!this.state.toast, toast: this.state.toast, dismissToast: () => this.dismissToast(),
+      search: this.state.search, onSearch: (e) => this.onSearch(e), hasSearch: !!this.state.search, clearSearch: () => this.clearSearch(),
+      resetFilters: () => this.resetFilters(),
+      following, toggleFollow: (e) => this.toggleFollow(e),
+      followLabel: following ? 'Suivi ✓' : 'Suivre +',
+      followBg: following ? 'rgba(247,127,28,0.3)' : 'rgba(247,127,28,0.14)', followColor: '#ffa645',
+      followBg2: following ? '#2a313d' : 'linear-gradient(180deg,#ffa645,#f77f1c)', followColor2: following ? '#fff' : '#0b0d12',
+      messageCreator: () => this.messageCreator(),
+      onProfileKey: this.key(() => this.go('profile')),
+      onFilePick: (e) => this.onFilePick(e), dropTitle: this.state.fileName ? this.state.fileName : 'Déposez votre fichier .sav ici',
+      saveDraft: () => this.saveDraft(), publishWorld: () => this.publishWorld(),
+      downloadSave: () => this.downloadSave(), openInApp: () => this.openInApp(), downloadApp: () => this.downloadApp(),
+      detailType: sel.type, detailName: sel.name, detailCreator: sel.creator || 'Seizo',
+      detailRating: sel.rating, detailSize: sel.size || '250 MB',
+      navItems,
+      heroStats: [
+        { value: '0', label: 'Mondes partagés' }, { value: '0', label: 'Téléchargements' },
+        { value: '0', label: 'Usines créées' }, { value: '1', label: 'Pionniers' },
+      ],
+      popularSaves: this.POPULAR.map((s, i) => this.decorate(s, 'home-pop' + i, this.POPULAR.length - i)),
+      hasPopular, noPopular: !hasPopular,
+      hasWorlds, noWorlds: !hasWorlds,
+      explorerSaves,
+      explorerCount: explorerSaves.length,
+      explorerEmpty: hasWorlds && explorerSaves.length === 0, // vide à cause des filtres
+      filterGroups, sortOptions,
+      profileSaves: this.PROFILE.map((s, i) => this.decorate(s, 'prof' + i, this.PROFILE.length - i)),
+      profileStats: [
+        { value: '0', label: 'Sauvegardes publiées', icon: React.createElement('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: '#f77f1c', strokeWidth: 2 }, React.createElement('path', { d: 'M4 4h16v6H4zM4 14h16v6H4z' })) },
+        { value: '1.4M', label: 'Téléchargements reçus', icon: React.createElement('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: '#f77f1c', strokeWidth: 2 }, React.createElement('path', { d: 'M12 16V4m0 12-5-5m5 5 5-5' }), React.createElement('path', { d: 'M4 20h16' })) },
+        { value: '286k', label: 'Likes', icon: React.createElement('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: '#f77f1c', strokeWidth: 2 }, React.createElement('path', { d: 'M12 21s-7-4.5-9.5-9A5 5 0 0 1 12 6a5 5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z' })) },
+      ],
+      detailShots: [{ id: 'det-shot1' }, { id: 'det-shot2' }, { id: 'det-shot3' }, { id: 'det-shot4' }],
+      detailMods: ['Smart! Foundations', 'Area Actions', 'Micro Manage', 'Infinite Nudge', 'Structural Solutions'],
+      detailStats: [
+        { label: 'Temps de jeu', value: sel.playtime || '500 h' }, { label: 'Téléchargements', value: sel.downloads || '52.8k' },
+        { label: 'Machines', value: '3 200' }, { label: 'Version', value: this.normVer(sel.version || 'v1.0+') },
+      ],
+      detailProduction: [
+        { label: 'Fer', value: '12 000/min', color: '#c3cbd8' },
+        { label: 'Cuivre', value: '6 000/min', color: '#ff8c4a' },
+        { label: 'Énergie', value: '45 000 MW', color: '#ffce6b' },
+      ],
+      detailComments: [],
+      publishTags,
+      analysisFields: [
+        { label: 'Bâtiments', value: '3 200' }, { label: 'Production totale', value: '18k/min' },
+        { label: 'Consommation', value: '42 GW' }, { label: 'Ressources', value: '9 types' },
+        { label: 'Taille monde', value: '250 MB' },
+      ],
+      appUpSteps: [
+        { n: '1', title: 'Détection locale', desc: 'FicsitSaveManager repère automatiquement votre dossier de sauvegardes Satisfactory.' },
+        { n: '2', title: 'Compression 7-Zip / LZ4', desc: 'Votre fichier .sav est archivé et compressé pour un transfert léger et rapide.' },
+        { n: '3', title: 'Empreinte d\'intégrité', desc: 'Un hash (SHA) est calculé pour garantir que la sauvegarde n\'est pas corrompue.' },
+        { n: '4', title: 'Partage', desc: 'Envoi vers Satisfactory Worlds et récupération d\'un lien de partage.' },
+      ],
+      appDownSteps: [
+        { n: '1', title: 'Un clic sur le site', desc: 'Bouton « Ouvrir avec FicsitSaveManager » sur n\'importe quelle sauvegarde.' },
+        { n: '2', title: 'Récupération & décompression', desc: 'Le logiciel télécharge l\'archive puis la décompresse (7-Zip/LZ4).' },
+        { n: '3', title: 'Placement intelligent', desc: 'Le .sav est déposé dans le bon dossier de sauvegardes Satisfactory.' },
+        { n: '4', title: 'Prêt à jouer', desc: 'Lancez Satisfactory, le monde apparaît dans votre menu de chargement.' },
+      ],
+      securityFeatures: [
+        { title: 'Vérification d\'intégrité', desc: 'Chaque sauvegarde est associée à une empreinte (hash SHA) pour détecter toute corruption.' },
+        { title: 'Portable, sans droits admin', desc: 'Un seul .exe autonome (~9,7 Mo) : rien à installer, aucune modification système.' },
+        { title: 'Format ouvert', desc: 'Archives 7-Zip/LZ4 standard : vos fichiers .sav restent lisibles et réutilisables sans le logiciel.' },
+      ],
+      footerCols: [
+        { title: 'Plateforme', links: mkLinks(['Explorer', 'Publier', 'Créateurs', 'Classements']) },
+        { title: 'Outils', links: mkLinks(['FicsitSaveManager', 'API développeurs', 'Discord Bot', 'Guides']) },
+        { title: 'Communauté', links: mkLinks(['Discord', 'Reddit', 'Twitch', 'Support']) },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
