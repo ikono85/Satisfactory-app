@@ -586,10 +586,10 @@
         <h1 style="font-family:'Rajdhani';font-weight:700;font-size:clamp(40px,7vw,60px);line-height:1;color:#fff;margin:0;">Ficsit<span style="color:#f77f1c;">SaveManager</span></h1>
         <p style="color:#c3cbd8;font-size:20px;line-height:1.5;margin:22px 0 32px;max-width:520px;">Le pont entre votre PC et Satisfactory Worlds. Un seul <strong style="color:#ffa645;">.exe portable</strong>, aucune installation : détection de vos sauvegardes, compression 7-Zip/LZ4, vérification d'intégrité, partage et chargement en un clic.</p>
         <div style="display:flex;flex-wrap:wrap;gap:14px;">
-          <button type="button" onClick="{{ downloadApp }}" style="border:0;display:flex;align-items:center;gap:11px;padding:16px 28px;border-radius:12px;background:linear-gradient(180deg,#ffa645,#f77f1c);color:#0b0d12;font-family:'Barlow Semi Condensed';font-weight:700;font-size:18px;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 28px rgba(247,127,28,0.45);transition:transform .16s;" style-hover="transform:translateY(-2px);">
+          <a href="FicsitSaveManager.exe" download="FicsitSaveManager.exe" style="text-decoration:none;border:0;display:flex;align-items:center;gap:11px;padding:16px 28px;border-radius:12px;background:linear-gradient(180deg,#ffa645,#f77f1c);color:#0b0d12;font-family:'Barlow Semi Condensed';font-weight:700;font-size:18px;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 28px rgba(247,127,28,0.45);transition:transform .16s;" style-hover="transform:translateY(-2px);">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="#0b0d12" aria-hidden="true"><path d="M3 12V6.75l6-1.32v6.48L3 12m17-9v8.75l-10 .15V5.21L20 3M3 13l6 .09v6.81l-6-1.15V13m17 .25V22l-10-1.91v-6.68l10 .09"/></svg>
             Télécharger le .exe
-          </button>
+          </a>
           <div style="padding:16px 24px;border-radius:12px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.15);color:#fff;font-weight:600;font-size:18px;">Portable · 9,7 Mo · sans installation</div>
         </div>
       </div>
@@ -757,7 +757,15 @@ class Component extends DCLogic {
   onFilePick(e) { const f = e.target.files && e.target.files[0]; this.setState({ fileName: f ? f.name : '' }); if (f) this.notify('Fichier « ' + f.name + ' » prêt à être analysé.'); }
   downloadSave() { const n = (this.state.selected && this.state.selected.name) || 'la sauvegarde'; this.notify('Téléchargement de « ' + n + ' » démarré… (démo)'); }
   openInApp() { this.notify('Ouverture dans FicsitSaveManager… (lien ficsitsavemanager://, démo)'); }
-  downloadApp() { this.notify('Téléchargement de FicsitSaveManager.exe démarré… (démo)'); }
+  downloadApp() {
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      const a = document.createElement('a');
+      a.href = 'FicsitSaveManager.exe';       // fichier déposé à côté de index.html
+      a.download = 'FicsitSaveManager.exe';
+      document.body.appendChild(a); a.click(); a.remove();
+    }
+    this.notify('Téléchargement de FicsitSaveManager.exe démarré…');
+  }
   messageCreator() { this.notify('Messagerie bientôt disponible.'); }
   saveDraft() { this.notify('Brouillon enregistré.'); }
   publishWorld() { this.notify('Monde envoyé pour analyse et publication ! (démo)'); }
